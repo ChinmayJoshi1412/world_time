@@ -13,7 +13,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
 
-    data = data.isNotEmpty ? data : ModalRoute.of(context)!.settings.arguments as Map;
+    data = data.isEmpty ? ModalRoute.of(context)!.settings.arguments as Map : data;
     print(data);
     String bgImage = data['isdaytime'] ? 'day.png':'night.png';
     return Scaffold(
@@ -37,18 +37,13 @@ class _HomeState extends State<Home> {
                       onPressed: () async{
                         dynamic result = await Navigator.pushNamed(context,'/location');
                         setState(() {
-                          data = {
-                            'time': result['time'],
-                            'location': result['location'],
-                            'isDaytime ': result['isDaytime'],
-                            'flag': result['flag']
-                          };
+                          data = result;
                         });
                       },
                   icon: Icon(Icons.edit_location),
                   label: Text('Edit Location'),
                   style: TextButton.styleFrom(
-                    primary: Colors.black
+                    primary: Colors.white
                   ),
                   ),
                   SizedBox(height: 20),
@@ -58,6 +53,7 @@ class _HomeState extends State<Home> {
                       Text(data['location'],style: TextStyle(
                         fontSize: 28,
                         letterSpacing: 2,
+                        color: Colors.white,
                       ),)
                     ],
                   ),
@@ -65,7 +61,8 @@ class _HomeState extends State<Home> {
                   Text(
                     data['time'],
                     style:TextStyle(
-                      fontSize: 66
+                      fontSize: 66,
+                      color: Colors.white
                     )
                   )
                 ],

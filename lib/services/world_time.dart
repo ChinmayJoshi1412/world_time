@@ -25,6 +25,8 @@ class WorldTime{
     now = now.add(Duration(hours: int.parse(offset_hours),minutes: int.parse(offset_minutes)));
     //set time property
     isDaytime = now.hour >6 && now.hour <18 ? true : false;
+    print(isDaytime);
     time = DateFormat.jm().format(now);
   }
+
 }
